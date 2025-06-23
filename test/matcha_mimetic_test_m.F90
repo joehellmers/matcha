@@ -57,11 +57,11 @@ contains
     type(test_result_t), allocatable :: test_results(:)
     type(test_description_t), allocatable :: test_descriptions(:)
     procedure(diagnosis_function_i), pointer :: &
-       mimetic1D_testing_ptr &
-       , mimetic2D_testing_ptr
+      mimetic1D_testing_ptr &
+      ,mimetic2D_testing_ptr
 
-       mimetic1D_testing_ptr => mimetic1D_testing
-       mimetic2D_testing_ptr => mimetic2D_testing
+      mimetic1D_testing_ptr => mimetic1D_testing
+      mimetic2D_testing_ptr => mimetic2D_testing
 
       test_descriptions = [ &
         test_description_t("test mimetic1D", mimetic1D_testing_ptr) &
@@ -209,7 +209,9 @@ contains
     ! RHS
     double precision, allocatable, dimension(:) :: rhs
 
-    test_passes = .true.
+    test_diagnosis = test_diagnosis_t(test_passed=.true., diagnostics_string="")
+    
+    ! test_passes = .true.
 
     m = 2*k + 1
     dx = (b-a)/m
@@ -307,7 +309,10 @@ contains
     ! Indexes
     integer :: i
 
-    test_passes = .true.
+    write(*,*) "Testing Mimetic 2-D Operators"
+    
+    test_diagnosis = test_diagnosis_t(test_passed=.true., diagnostics_string="")
+    !test_passes = .true.
 
   end function mimetic2D_testing
 
